@@ -3,3 +3,4 @@ syntax: glob
 *.so
 *.bundle
 test.rb
+*.gem
