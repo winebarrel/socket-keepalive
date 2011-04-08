@@ -1,0 +1,21 @@
+= socket-keepalive
+
+== Description
+
+TCP Keepalive extension for Ruby
+
+== Install
+
+gem install socket-keepalive
+
+== Example
+
+  require 'socket'
+  require 'socket/keepalive'
+  
+  s = TCPSocket.open('localhost', 7)
+  
+  s.keepalive = true
+  s.keepidle = 15
+  s.keepintvl = 5
+  s.keepcnt = 3
