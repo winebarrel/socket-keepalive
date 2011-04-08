@@ -170,7 +170,7 @@ void Init_socket_keepalive() {
   rb_mSocketKeepalive = rb_define_module("SocketKeepalive");
   rb_eSocketKeepaliveError = rb_define_class_under(rb_mSocketKeepalive, "Error", rb_eStandardError);
 
-  // TCP_KEEPIDLE
+  // SO_KEEPALIVE
   rb_define_module_function(rb_mSocketKeepalive, "get_keepalive", rb_sk_get_keepalive, 1);
   rb_define_module_function(rb_mSocketKeepalive, "set_keepalive", rb_sk_set_keepalive, 2);
 
