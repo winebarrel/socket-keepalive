@@ -76,7 +76,7 @@ static VALUE rb_sk_set_keepidle(VALUE self, VALUE vSockfd, VALUE vOptval) {
   int sockfd, optval, rv;
 
   sockfd = NUM2INT(vSockfd);
-  sockfd = NUM2INT(vSockfd);
+  optval = NUM2INT(vOptval);
 
   rv = setsockopt(sockfd, IPPROTO_TCP, TCP_KEEPIDLE, (void*) &optval, sizeof(optval));
 
@@ -115,7 +115,7 @@ static VALUE rb_sk_set_keepintvl(VALUE self, VALUE vSockfd, VALUE vOptval) {
   int sockfd, optval, rv;
 
   sockfd = NUM2INT(vSockfd);
-  sockfd = NUM2INT(vSockfd);
+  optval = NUM2INT(vOptval);
 
   rv = setsockopt(sockfd, IPPROTO_TCP, TCP_KEEPINTVL, (void*) &optval, sizeof(optval));
 
@@ -154,7 +154,7 @@ static VALUE rb_sk_set_keepcnt(VALUE self, VALUE vSockfd, VALUE vOptval) {
   int sockfd, optval, rv;
 
   sockfd = NUM2INT(vSockfd);
-  sockfd = NUM2INT(vSockfd);
+  optval = NUM2INT(vOptval);
 
   rv = setsockopt(sockfd, IPPROTO_TCP, TCP_KEEPCNT, (void*) &optval, sizeof(optval));
 
@@ -166,24 +166,23 @@ static VALUE rb_sk_set_keepcnt(VALUE self, VALUE vSockfd, VALUE vOptval) {
 #endif
 }
 
-
 void Init_socket_keepalive() {
   rb_mSocketKeepalive = rb_define_module("SocketKeepalive");
   rb_eSocketKeepaliveError = rb_define_class_under(rb_mSocketKeepalive, "Error", rb_eStandardError);
 
   // TCP_KEEPIDLE
-  rb_define_module_function(rb_mSocketKeepalive, "get_keepalive", rb_sk_get_keepalive, 0);
+  rb_define_module_function(rb_mSocketKeepalive, "get_keepalive", rb_sk_get_keepalive, 1);
   rb_define_module_function(rb_mSocketKeepalive, "set_keepalive", rb_sk_set_keepalive, 2);
 
   // TCP_KEEPIDLE
-  rb_define_module_function(rb_mSocketKeepalive, "get_keepidle", rb_sk_get_keepidle, 0);
+  rb_define_module_function(rb_mSocketKeepalive, "get_keepidle", rb_sk_get_keepidle, 1);
   rb_define_module_function(rb_mSocketKeepalive, "set_keepidle", rb_sk_set_keepidle, 2);
 
   // TCP_KEEPINTVL
-  rb_define_module_function(rb_mSocketKeepalive, "get_keepintvl", rb_sk_get_keepintvl, 0);
+  rb_define_module_function(rb_mSocketKeepalive, "get_keepintvl", rb_sk_get_keepintvl, 1);
   rb_define_module_function(rb_mSocketKeepalive, "set_keepintvl", rb_sk_set_keepintvl, 2);
 
   // TCP_KEEPCNT
-  rb_define_module_function(rb_mSocketKeepalive, "get_keepcnt", rb_sk_get_keepcnt, 0);
+  rb_define_module_function(rb_mSocketKeepalive, "get_keepcnt", rb_sk_get_keepcnt, 1);
   rb_define_module_function(rb_mSocketKeepalive, "set_keepcnt", rb_sk_set_keepcnt, 2);
 }
